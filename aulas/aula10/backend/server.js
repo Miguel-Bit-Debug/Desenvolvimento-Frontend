@@ -19,6 +19,12 @@ app.get("/listar-pagamentos", async (req, res) => {
 app.post("/cadastrar-pagamento", async (req, res) => {
     let pagamento = { ...req.body }
 
+    let pagamentoValido = pagamento.tipoPagamento.toUpperCase() != 'C' && pagamento.tipoPagamento.toUpperCase() != "D"
+
+    if (pagamentoValido) {
+        return res.status(400).json('pagamento invalido')
+    }
+
     try {
         await Pagamento.create(pagamento)
         return res.status(201).json("Pagamento cadastrado com sucesso!")
