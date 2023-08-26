@@ -1,11 +1,13 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const cors = require('cors')
 const app = express()
 const port = 8050
 const connectionString = "mongodb+srv://admin:admin123@appdatabase.ry0gm2w.mongodb.net/"
 const Pagamento = require('./models/pagamento')
 
 app.use(express.json())
+app.use(cors())
 
 app.get("/listar-saldo-consolidado", async (req, res) => {
     try {
